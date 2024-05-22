@@ -15,6 +15,7 @@ describe("Get notes", () => {
             headers: authToken
         })
         .then( (response) => {
+            cy.log(JSON.stringify(response)),
             expect(response.status).to.eq(200)
         })
     })

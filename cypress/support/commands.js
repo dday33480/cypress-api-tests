@@ -38,3 +38,15 @@ Cypress.Commands.add('login', () => {
         expect(response.status).to.eq(200)
     })
 })
+
+Cypress.Commands.add("delete", (id) => {
+    const authToken = {
+        "x-auth-token": Cypress.env('token')
+    }
+
+    cy.request({
+        url: `https://practice.expandtesting.com/notes/api/notes/${id}`,
+        method: "Delete",
+        headers: authToken
+    })
+})

@@ -36,7 +36,7 @@ describe("Post a new note", () => {
                 .then( (response)  => {
                     expect(response.status).to.eq(200),
                     expect(response.body.title).not.eq(""),
-                    cy.log(JSON.stringify(response))
+                    cy.log(JSON.stringify(response.body))
                     })
             })
 

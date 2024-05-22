@@ -22,22 +22,23 @@ describe("Post a new note", () => {
             "x-auth-token" : Cypress.env('token')
         };
 
-        cy.request({
-            url: 'https://practice.expandtesting.com/notes/api/notes',
-            method: 'POST',
-            headers: authToken,
-            body: {
-                "title": "First post using Cypress",
-                "description": "Note created using Cypress and JS",
-                "category": "Home"
+            cy.request({
+                url: 'https://practice.expandtesting.com/notes/api/notes',
+                method: 'POST',
+                headers: authToken,
+                body: {
+                    "title": "First note",
+                    "description": "First note added to Personal",
+                    "category": "Personal"
                 }
-            })
-
-            .then( (response)  => {
-                expect(response.status).to.eq(200),
-                expect(response.body.title).not.eq("")
                 })
-        })
+
+                .then( (response)  => {
+                    expect(response.status).to.eq(200),
+                    expect(response.body.title).not.eq(""),
+                    cy.log(JSON.stringify(response))
+                    })
+            })
 
         it('Create new note - Failure', () => {
             const authToken = {

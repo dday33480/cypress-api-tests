@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.fixture('userData').then(userFixture => {
+        cy.request({
+            url: "https://practice.expandtesting.com/notes/api/users/login",
+            method: "POST",
+            body: userFixture
+        })
+    })
+    .then( (response) => {
+        let token = response.body.data.token
+        Cypress.env('token', token)
+        expect(response.status).to.eq(200)
+    })
+})

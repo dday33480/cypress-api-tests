@@ -1,7 +1,5 @@
 describe("Post a new note", () => {
 
-    let token = "";
-
     it("Create new user", () => {
         cy.fixture('userData').then(userFixture => {
             cy.request({
@@ -16,18 +14,7 @@ describe("Post a new note", () => {
     })
 
     it("User login", () => {
-        cy.fixture('userData').then(userFixture => {
-            cy.request({
-                url: "https://practice.expandtesting.com/notes/api/users/login",
-                method: "POST",
-                body: userFixture
-            })
-        })
-        .then( (response) => {
-            token = response.body.data.token
-            Cypress.env('token', token)
-            expect(response.status).to.eq(200)
-        })
+        cy.login()
     })
 
     it('Create new note - Success', () => {
